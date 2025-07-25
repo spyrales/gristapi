@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/edouard-morin/gristapi/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/edouard-morin/gristapi/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/spyrales/gristapi/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/spyrales/gristapi/actions/workflows/R-CMD-check.yaml)
 [![Version](https://img.shields.io/github/r-package/v/spyrales/gristapi)](https://github.com/spyrales/gristapi/blob/main/DESCRIPTION)
 <!-- badges: end -->
 
