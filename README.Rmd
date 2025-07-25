@@ -1,0 +1,94 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# gristapi <img src='man/figures/gristapi_logo.png' align="right" width="139px" />
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/edouard-morin/gristapi/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/edouard-morin/gristapi/actions/workflows/R-CMD-check.yaml)
+[![Version](https://img.shields.io/github/r-package/v/spyrales/gristapi)](https://github.com/spyrales/gristapi/blob/main/DESCRIPTION)
+<!-- badges: end -->
+
+The goal of this package is to communicate from R with a Grist API.
+
+he package provides an R6 class to connect to a Grist document (which contains multiple tables), and a set of functions to interact with the document.
+
+This work follows the Grist API references https://support.getgrist.com/api/ as of July 2025.
+
+This project is currently under development; feel free to submit issues!
+
+---
+
+L’objectif de ce package est de communiquer depuis R avec une API Grist.
+
+Le paquet fournit une classe R6 pour se connecter à un document Grist (qui contient plusieurs tables), et, un ensemble de fonctions pour échanger avec le document.
+
+Ce travail suit les références de l’API Grist https://support.getgrist.com/api/ de juillet 2025.
+
+Projet en développement, n’hésitez pas à faire des tickets !
+
+## Installation
+
+You can install the current version of gristapi from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("spyrales/gristapi")
+```
+
+## Documentation
+
+Presentation site of the package and its functions https://spyrales.github.io/gristapi/ 
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(gristapi)
+suppressMessages(library(dplyr))
+# Working only if Env Var "GRIST_KEY" and "GRIST_DOC_TEST" are defined
+
+# Create a New Api Object on one grist document
+api <- grist_api$new(
+  server = 'https://grist.numerique.gouv.fr', 
+  api_key = Sys.getenv("GRIST_KEY"), 
+  doc_id = Sys.getenv("GRIST_DOC_TEST")
+  )
+
+# Create a table with data
+add_records(api,
+  table_id = "Mtcars",
+  record_dicts = mtcars |> mutate(names = row.names(mtcars)) |> relocate(names),
+  create_or_replace = TRUE
+  )
+
+# Call all data from a table
+fetch_table(api,"Mtcars")
+
+# Synchronize a table with a dataframe (update or add)
+# Preparing the dataframe
+new_data <- fetch_table(api,"Mtcars", filters = 'filter={"cyl": [8]}')
+new_data <- new_data |> 
+  mutate(carb = 4, names = ifelse(names =='Camaro Z28', 'Camaro Z28 - custom', names)) |> 
+  select(-id)
+new_data
+# Launching synchronization on the "names" key
+sync_table(api,"Mtcars", new_data, key_cols = c("names"))
+# One entry was added, the other 13 were updated
+tail(fetch_table(api,"Mtcars"))
+```
+
+## Acknowledgements
+Thanks to [py_grist_api](https://github.com/gristlabs/py_grist_api) by Grist Labs and  [gristr](https://forge.ird.fr/phim/cunnac/gristr) by Sebastien Cunnac, which provided the basis of inspiration for this work.
