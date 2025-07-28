@@ -22,6 +22,8 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       GRIST_KEY: ${{ secrets.GRIST_KEY }}
       GRIST_DOC_TEST: ${{ secrets.GRIST_DOC_TEST }}
+      GETGRIST_KEY: ${{ secrets.GETGRIST_KEY }}
+      GETGRIST_DOC_TEST: ${{ secrets.GETGRIST_DOC_TEST }}
     permissions:
       contents: write
     steps:
