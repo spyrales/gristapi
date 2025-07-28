@@ -1,6 +1,9 @@
+# gristapi 0.1.0
+Première release :tada:
+
 # gristapi 0.0.2
 
-Sortie des fonction de base en extérieur de la méthode R6 pour facilité l'usage.
+Sortie des fonctions de base en extérieur de la méthode R6 pour facilité l'usage.
 Ajout de la fonction `countrows()` et gestion des limites de l'api Grist (loop 500 rows)
 
 # gristapi 0.0.1

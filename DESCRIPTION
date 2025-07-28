@@ -1,6 +1,6 @@
 Package: gristapi
 Title: Package R pour Communiquer avec une Api Grist
-Version: 0.0.2
+Version: 0.1.0
 Authors@R: c(
     person("Edouard", "Morin", , "edouard.morin@developpement-durable.gouv.fr", role = c("aut", "cre")),
     person("Juliette", "ENGELAERE-LEFEBVRE", , "juliette.engelaere-lefebvre@developpement-durable.gouv.fr", role = "aut")
